@@ -1,4 +1,24 @@
-let myLibrary = [];
+let myLibrary = [
+    {
+        author: "Bob",
+        title: "Jim Bob",
+        pages: 87,
+        status: "read"
+    },
+    {
+        author: "Jamie",
+        title: "Rogan Josh",
+        pages: 87,
+        status: "read"
+    }
+];
+
+let bookShelf = document.querySelector(".bookShelf");
+let newBook = "";
+
+for (let i = 0; i < myLibrary.length; i++ ) {
+    newBook = createBookCard(myLibrary[i]["author"], myLibrary[i]["title"], myLibrary[i]["pages"], myLibrary[i]["status"]);
+}
 
 function Book(author, title, pages, status) {
     this.author = author;
@@ -53,4 +73,14 @@ function addBookToLibrary() {
     myLibrary.push(addedBook);
 }
 
-addBookToLibrary();
+function createBookCard(author, title, pages, status) {
+    let newCard = document.createElement("div");
+    newCard.classList.add("bookCard");
+    newCard.innerText = `
+        Author: ${author}
+        Title: ${title}
+        Pages: ${pages}
+        Status: ${status}
+    `;
+    bookShelf.appendChild(newCard);
+}
