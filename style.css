@@ -4,6 +4,14 @@ body {
 }
 
 .bookShelf {
-    height: 600px;
+    height: 400px;
     background-color: brown;
+}
+
+.bookCard {
+    height: 40px;
+    width: 40px;
+    color: white;
+    border: solid;
+    border-color: yellow;
 }
