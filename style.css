@@ -3,15 +3,47 @@ body {
     width: 100vw;
 }
 
+h1 {
+    text-align: center;
+}
+
+footer {
+    display: flex;
+    height: 100px;
+    width: 100vw;
+}
+
 .bookShelf {
-    height: 400px;
+    height: 500px;
     background-color: brown;
+    padding: 10px 10px 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(7, 200px);
+    column-gap: 10px;
+    grid-template-rows: repeat(4, 150px);
+    row-gap: 10px;
+    place-items: center center;
+    overflow-y: scroll;
 }
 
 .bookCard {
-    height: 40px;
-    width: 40px;
-    color: white;
-    border: solid;
-    border-color: yellow;
+    height: 150px;
+    width: 200px;
+    background-color: lightgray;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+}
+
+.remove-buttons {
+
+}
+
+.read-button {
+
+}
+
+.newBook {
+    height: 75px;
+    width: 150px;
 }
