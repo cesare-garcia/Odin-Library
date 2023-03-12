@@ -1,0 +1,9 @@
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+.bookShelf {
+    height: 600px;
+    background-color: brown;
+}
