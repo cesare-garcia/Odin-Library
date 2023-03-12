@@ -1,0 +1,72 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+}
+
+header {
+    height: 100px;
+    width: inherit;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: black;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+main {
+    height: 525px;
+    width: inherit;
+    background-color: rgba(213, 219, 225, 0.802);
+    padding: 10px 10px 10px 10px;
+    /* overflow-y: scroll; */
+}
+
+.bookShelf {
+    display: grid;
+    grid-template-columns: repeat(8, 200px);
+    grid-template-rows: repeat(4, 150px);
+    gap: 10px 10px;
+}
+
+.bookCards {
+    height: 150px;
+    width: 200px;
+    padding: 5px 5px 5px 5px;
+    color: black;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px darkgray;
+}
+
+.remove {
+    height: 25px;
+    width: 75px;
+}
+
+.read {
+    height: 25px;
+    width: 75px;
+}
+
+footer {
+    height: 100px;
+    display: flex;
+    padding: 5px 10px 5px 10px;
+    background-color: aliceblue;
+    justify-content: space-evenly;
+}
+
+.newBook {
+    height: 50px;
+    width: 200px;
+    align-self: center;
+}
+
+.form-space {
+    align-self: center;
+}
