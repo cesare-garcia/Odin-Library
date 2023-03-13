@@ -23,7 +23,6 @@ newBooks.addEventListener("click", (e) => {
             let addedBook = new Book (authorAnswer, titleAnswer, pagesAnswer, statusAnswer);
             myLibrary.push(addedBook);
             displayBooks();
-            myLibrary.pop();
             formSpace.removeChild(formElement);
             newBooks.disabled = false;
         }
@@ -61,6 +60,9 @@ function buildCard(bookAuthor, bookTitle, bookPages, bookStatus) {
 
 function displayBooks() {
     for ( let i = 0; i < myLibrary.length; i++) {
+        
+        // if statement that checks to see if Object is already in array. if not, then build card.
+        
         buildCard( myLibrary[i]["author"], myLibrary[i]["title"], myLibrary[i]["pages"] ,myLibrary[i]["readStatus"]);
     }
 }
@@ -91,9 +93,10 @@ function organizeForm() {
 
     let statusInput = createInput();
     statusInput.setAttribute("id","readStatus");
+    statusInput.setAttribute("type","checkbox");
     let statusLabel = createInputLabel();
     statusLabel.setAttribute("for","readStatus");
-    statusLabel.innerText = "Read/Unread?";
+    statusLabel.innerText = "Have you read it?";
 
     let submit = createSubmitButton();
     
