@@ -45,23 +45,51 @@ function displayBooks() {
     }
 }
 
-// create submission form
+// create submission form. May need to refactor because there's too much happening.
 
 function organizeForm() {
     let newForm = createForm();
     let grid = gridDiv();
+
     let authorInput = createInput();
+    authorInput.setAttribute("id","author");
+    let authorLabel = createInputLabel();
+    authorLabel.setAttribute("for","author");
+    authorLabel.innerText = "Author";
+
     let titleInput = createInput();
+    titleInput.setAttribute("id","title");
+    let titleLabel = createInputLabel();
+    titleLabel.setAttribute("for","title");
+    titleLabel.innerText = "Title";
+
     let pagesInput = createInput();
+    pagesInput.setAttribute("id","pages");
+    let pagesLabel = createInputLabel();
+    pagesLabel.setAttribute("for","title");
+    pagesLabel.innerText = "Number of Pages";
+
     let statusInput = createInput();
+    statusInput.setAttribute("id","readStatus");
+    let statusLabel = createInputLabel();
+    statusLabel.setAttribute("for","readStatus");
+    statusLabel.innerText = "Read/Unread?";
+
     let submit = createSubmitButton();
     
     formSpace.appendChild(newForm);
     newForm.appendChild(grid);
 
+    grid.appendChild(authorLabel);
     grid.appendChild(authorInput);
+
+    grid.appendChild(titleLabel);
     grid.appendChild(titleInput);
+
+    grid.appendChild(pagesLabel);
     grid.appendChild(pagesInput);
+
+    grid.appendChild(statusLabel);
     grid.appendChild(statusInput);
 
     newForm.appendChild(submit);
@@ -76,6 +104,11 @@ function gridDiv() {
     let grid = document.createElement("div");
     grid.classList.add("form-grid");
     return grid;
+}
+
+function createInputLabel() {
+    let newLabel = document.createElement("label");
+    return newLabel;
 }
 
 function createInput() {
