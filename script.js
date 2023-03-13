@@ -8,6 +8,25 @@ const newBooks = document.querySelector(".newBook");
 newBooks.addEventListener("click", (e) => {
     organizeForm();
     newBooks.disabled = true;
+    let formElement = document.querySelector("form");
+    // event listener for submit button. Re-enable add new book button
+
+    const submission = document.querySelector(".submit");
+    submission.addEventListener("click", (e) => {
+        e.preventDefault();
+        let authorAnswer = document.getElementById("author").value.toUpperCase().trim();
+        let titleAnswer = document.getElementById("title").value.toUpperCase().trim();
+        let pagesAnswer = document.getElementById("pages").value.toUpperCase().trim();
+        let statusAnswer = document.getElementById("readStatus").value.toUpperCase().trim();
+
+        if ( authorAnswer != "" && titleAnswer != "" && pagesAnswer != "" && statusAnswer != "" ) {
+            let addedBook = new Book (authorAnswer, titleAnswer, pagesAnswer, statusAnswer);
+            myLibrary.push(addedBook);
+            displayBooks();
+            formSpace.removeChild(formElement);
+            newBooks.disabled = false;
+        }
+    });
 });
 
 function Book(author, title, pages, readStatus) {
