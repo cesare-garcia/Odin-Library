@@ -36,7 +36,7 @@ form {
 
 input {
     height: 22px;
-    width: 140px;
+    width: 160px;
 }
 
 .bookShelf {
@@ -87,9 +87,10 @@ footer {
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 150px) ;
+    grid-template-columns: 120px 170px 120px 170px ;
     grid-template-rows: repeat(2, 30px);
-    place-items: center center;
+    place-items: center end;
+    gap: 5px;
 }
 
 .submit { 
