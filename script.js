@@ -1,21 +1,14 @@
-let myLibrary = [
-    {
-        author: "Test1",
-        title: "xx",
-        pages: 42,
-        readStatus: "read"
-    },
-    {
-        author: "Test2",
-        title: "yy",
-        pages: 42,
-        readStatus: "read"
-    }
-];
+let myLibrary = [];
 
 const bookShelf = document.querySelector(".bookShelf");
+const formSpace = document.querySelector(".form-space");
 
-// displayBooks();
+const newBooks = document.querySelector(".newBook");
+
+newBooks.addEventListener("click", (e) => {
+    organizeForm();
+    newBooks.disabled = true;
+});
 
 function Book(author, title, pages, readStatus) {
     this.author = author;
@@ -50,6 +43,51 @@ function displayBooks() {
     for ( let i = 0; i < myLibrary.length; i++) {
         buildCard( myLibrary[i]["author"], myLibrary[i]["title"], myLibrary[i]["pages"] ,myLibrary[i]["readStatus"]);
     }
+}
+
+// create submission form
+
+function organizeForm() {
+    let newForm = createForm();
+    let grid = gridDiv();
+    let authorInput = createInput();
+    let titleInput = createInput();
+    let pagesInput = createInput();
+    let statusInput = createInput();
+    let submit = createSubmitButton();
+    
+    formSpace.appendChild(newForm);
+    newForm.appendChild(grid);
+
+    grid.appendChild(authorInput);
+    grid.appendChild(titleInput);
+    grid.appendChild(pagesInput);
+    grid.appendChild(statusInput);
+
+    newForm.appendChild(submit);
+}
+
+function createForm() {
+    let newForm = document.createElement("form");
+    return newForm;
+}
+
+function gridDiv() {
+    let grid = document.createElement("div");
+    grid.classList.add("form-grid");
+    return grid;
+}
+
+function createInput() {
+    let newInput = document.createElement("input");
+    return newInput;
+}
+
+function createSubmitButton() {
+    let submit = document.createElement("button");
+    submit.classList.add("submit");
+    submit.innerText = "Submit";
+    return submit;
 }
 
 // card element creation functions
