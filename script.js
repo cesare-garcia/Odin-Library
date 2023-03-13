@@ -23,6 +23,7 @@ newBooks.addEventListener("click", (e) => {
             let addedBook = new Book (authorAnswer, titleAnswer, pagesAnswer, statusAnswer);
             myLibrary.push(addedBook);
             displayBooks();
+            myLibrary.pop();
             formSpace.removeChild(formElement);
             newBooks.disabled = false;
         }
