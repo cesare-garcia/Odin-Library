@@ -27,6 +27,18 @@ main {
     /* overflow-y: scroll; */
 }
 
+form {
+    height: inherit;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+input {
+    height: 22px;
+    width: 140px;
+}
+
 .bookShelf {
     display: grid;
     grid-template-columns: repeat(8, 200px);
@@ -50,12 +62,13 @@ main {
 
 .read {
     height: 25px;
-    width: 75px;
+    width: 100px;
 }
 
 footer {
     height: 100px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 300px 1fr;
     padding: 5px 10px 5px 10px;
     background-color: aliceblue;
     justify-content: space-evenly;
@@ -69,4 +82,17 @@ footer {
 
 .form-space {
     align-self: center;
+    height: inherit;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 150px) ;
+    grid-template-rows: repeat(2, 30px);
+    place-items: center center;
+}
+
+.submit { 
+    height: 50px;
+    width: 200px;
 }
