@@ -53,6 +53,7 @@ input[type="number"] {
 main {
     background-color: rgb(243, 243, 243);
     height: inherit;
+    padding: 15px;
 }
 
 button[type="submit"] {
@@ -95,4 +96,33 @@ button[type="submit"] {
 
 [hidden] {
     display: none;
+}
+
+.bookCard {
+    background-color: white;
+    box-shadow: 3px 3px 3px lightgray;
+    padding: 10px;
+    height: 200px;
+    width: 220px;
+    display: grid;
+    grid-template-rows: 150px 50px;
+}
+
+.bookCard>p {
+    place-self: center center;
+}
+
+.cardButtonBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardButtonBox>button {
+    background-color: rgb(45, 216, 159);
+    color: white;
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 20px;
 }
