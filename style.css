@@ -54,6 +54,12 @@ main {
     background-color: rgb(243, 243, 243);
     height: inherit;
     padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 240px);
+    column-gap: 15px;
+    grid-template-rows: repeat(5, 220px);
+    row-gap: 15px;
+    overflow-y: scroll;
 }
 
 button[type="submit"] {
