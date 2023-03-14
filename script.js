@@ -76,16 +76,13 @@ Book.prototype.buildBook = function() {
     bookCardDiv.classList.add("bookCard");
     let cardText = document.createElement("p");
     cardText.classList.add("cardText");
-
-    // I can add unique ids based on the titles to these p elements. Then I can querySelect, change inner text to match the relevant thing. maybe
-
     cardText.innerText = `Author: ${this.author}
         Title: ${this.title}
         Pages: ${this.pages}
     `;
-
     let statusText = document.createElement("p");
     statusText.classList.add("cardText");
+    // Then I can querySelect, change inner text to match the relevant thing. maybe
     statusText.setAttribute("id","statusText");
     statusText.innerText = `Status: ${this.readStatus}`;
 
@@ -113,15 +110,25 @@ function addBookToLibrary(newBook) {
 
 function displayBooks(currentBook, libraryArray) {
 
-// find some way to prevent repeats. Some kind of clearing mechanism is needed here. So each displayBooks is starting fresh.
+    let bookShelfPresence = document.querySelector(".bookShelf");
+    if ( bookShelfPresence == null ) {
+        let bookShelf = document.createElement("div");
+        bookShelf.classList.add("bookShelf");
+        main.appendChild(bookShelf);
 
-
-    console.log(currentBook);
-    for (let i = 0; i < libraryArray.length; i++) {
-        console.log(libraryArray[i]);
+        for (let i = 0; i < libraryArray.length; i++) {
+            let newCard = myLibrary[i].buildBook();
+            bookShelf.appendChild(newCard);
+        }
+    } else {
+        main.removeChild(bookShelfPresence);
+        let bookShelf = document.createElement("div");
+        bookShelf.classList.add("bookShelf");
+        main.appendChild(bookShelf);
         
-        
-        let newCard = myLibrary[i].buildBook();
-        main.appendChild(newCard);
-    }
+        for (let i = 0; i < libraryArray.length; i++) {
+            let newCard = myLibrary[i].buildBook();
+            bookShelf.appendChild(newCard);
+        }
+    }    
 }
