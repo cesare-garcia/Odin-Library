@@ -27,13 +27,21 @@ submitInformation.addEventListener("click", (e) => {
     if ( authorInput != "" && titleInput != "" && pagesInput != "" ) {
         let submittedBook = new Book (authorInput, titleInput, pagesInput, statusInput);
     
-        addBookToLibrary(submittedBook);
-    
-        form.reset();
-        overlayElement.removeAttribute("id");
-        form.hidden = true;
-    }
+        let duplicateTest = myLibrary.some( (e) => e["author"] == submittedBook["author"] && e["title"] == submittedBook["title"] );
 
+        if ( duplicateTest == true ) {
+            alert("This library does not accept duplicates.");
+        } else {
+            addBookToLibrary(submittedBook);
+    
+            form.reset();
+            overlayElement.removeAttribute("id");
+            form.hidden = true;
+    
+            displayBooks(myLibrary);
+    
+        }
+    }
 });
 
 function Book(authorName, title, pages, readStatus) {
@@ -44,21 +52,10 @@ function Book(authorName, title, pages, readStatus) {
 }
 
 function addBookToLibrary(newBook) {
-    
-    // may move this into event handler to prevent form submission if duplicate
-
-    let duplicateTest = myLibrary.some( (e) => e["author"] == newBook["author"] && e["title"] == newBook["title"] );
-    
-    if ( duplicateTest == false ) {
-        myLibrary.push(newBook);
-        console.log(myLibrary);
-    } else {
-        alert("This is a duplicate");
-    }
+    myLibrary.push(newBook);
 }
 
 function displayBooks(libraryArray) {
-
 
     for (let i = 0; i < libraryArray.length; i++) {
         let newCard = buildBookCard(libraryArray[i]["author"], libraryArray[i]["title"], libraryArray[i]["pages"], libraryArray[i]["status"]);
