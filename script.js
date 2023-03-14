@@ -37,16 +37,20 @@ submitInformation.addEventListener("click", (e) => {
             overlayElement.removeAttribute("id");
             form.hidden = true;
     
-            displayBooks(myLibrary);
+            displayBooks(submittedBook, myLibrary);
 
             let readUnreadStatus = document.querySelectorAll(".read-unread");
             readUnreadStatus.forEach( e => e.addEventListener("click", (e) => {
-                console.log(e.target.innerText);
+                if (e.target) {
+                    console.log(e.target);
+                } 
             }));
 
             let removeBookButtons = document.querySelectorAll(".removeBookNow");
             removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
-                console.log(e.target.innerText);
+                if (e.target) {
+                    console.log(e.target);
+                } 
             }));
         }  
     }
@@ -67,31 +71,24 @@ Book.prototype.changeStatus = function() {
     }
 };
 
-function addBookToLibrary(newBook) {
-    myLibrary.push(newBook);
-}
-
-function displayBooks(libraryArray) {
-
-// find some way to prevent repeats
-
-    for (let i = 0; i < libraryArray.length; i++) {
-        let newCard = buildBookCard(libraryArray[i]["author"], libraryArray[i]["title"], libraryArray[i]["pages"], libraryArray[i]["readStatus"]);
-        main.appendChild(newCard);
-    }
-
-}
-
-function buildBookCard(bookAuthor, bookTitle, bookPages, bookStatus) {
+Book.prototype.buildBook = function() {
     let bookCardDiv = document.createElement("div");
     bookCardDiv.classList.add("bookCard");
     let cardText = document.createElement("p");
     cardText.classList.add("cardText");
-    cardText.innerText = `Author: ${bookAuthor}
-        Title: ${bookTitle}
-        Pages: ${bookPages}
-        Status: ${bookStatus}
+
+    // I can add unique ids based on the titles to these p elements. Then I can querySelect, change inner text to match the relevant thing. maybe
+
+    cardText.innerText = `Author: ${this.author}
+        Title: ${this.title}
+        Pages: ${this.pages}
     `;
+
+    let statusText = document.createElement("p");
+    statusText.classList.add("cardText");
+    statusText.setAttribute("id","statusText");
+    statusText.innerText = `Status: ${this.readStatus}`;
+
     let cardButtonBox = document.createElement("div");
     cardButtonBox.classList.add("cardButtonBox");
     let removeButton = document.createElement("button");
@@ -102,9 +99,31 @@ function buildBookCard(bookAuthor, bookTitle, bookPages, bookStatus) {
     readButton.classList.add("read-unread");
 
     bookCardDiv.appendChild(cardText);
+    bookCardDiv.appendChild(statusText);
     bookCardDiv.appendChild(cardButtonBox);
     cardButtonBox.appendChild(removeButton);
     cardButtonBox.appendChild(readButton);
 
     return bookCardDiv;
+};
+
+
+
+function addBookToLibrary(newBook) {
+    myLibrary.push(newBook);
+}
+
+function displayBooks(currentBook, libraryArray) {
+
+// find some way to prevent repeats. Some kind of clearing mechanism is needed here. So each displayBooks is starting fresh.
+
+
+    console.log(currentBook);
+    for (let i = 0; i < libraryArray.length; i++) {
+        console.log(libraryArray[i]);
+        
+        
+        let newCard = myLibrary[i].buildBook();
+        main.appendChild(newCard);
+    }
 }
