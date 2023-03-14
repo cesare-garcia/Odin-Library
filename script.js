@@ -26,7 +26,6 @@ submitInformation.addEventListener("click", (e) => {
 
     if ( authorInput != "" && titleInput != "" && pagesInput != "" ) {
         let submittedBook = new Book (authorInput, titleInput, pagesInput, statusInput);
-        console.log(submittedBook);
         let duplicateTest = myLibrary.some( (e) => e["author"] == submittedBook["author"] && e["title"] == submittedBook["title"] );
 
         if ( duplicateTest == true ) {
@@ -39,8 +38,17 @@ submitInformation.addEventListener("click", (e) => {
             form.hidden = true;
     
             displayBooks(myLibrary);
-    
-        }
+
+            let readUnreadStatus = document.querySelectorAll(".read-unread");
+            readUnreadStatus.forEach( e => e.addEventListener("click", (e) => {
+                console.log(e.target.innerText);
+            }));
+
+            let removeBookButtons = document.querySelectorAll(".removeBookNow");
+            removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
+                console.log(e.target.innerText);
+            }));
+        }  
     }
 });
 
@@ -88,8 +96,10 @@ function buildBookCard(bookAuthor, bookTitle, bookPages, bookStatus) {
     cardButtonBox.classList.add("cardButtonBox");
     let removeButton = document.createElement("button");
     removeButton.innerText = "Remove";
+    removeButton.classList.add("removeBookNow");
     let readButton = document.createElement("button");
     readButton.innerText = "Read/Unread?";
+    readButton.classList.add("read-unread");
 
     bookCardDiv.appendChild(cardText);
     bookCardDiv.appendChild(cardButtonBox);
