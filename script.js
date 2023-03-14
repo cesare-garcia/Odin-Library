@@ -26,7 +26,7 @@ submitInformation.addEventListener("click", (e) => {
 
     if ( authorInput != "" && titleInput != "" && pagesInput != "" ) {
         let submittedBook = new Book (authorInput, titleInput, pagesInput, statusInput);
-    
+        console.log(submittedBook);
         let duplicateTest = myLibrary.some( (e) => e["author"] == submittedBook["author"] && e["title"] == submittedBook["title"] );
 
         if ( duplicateTest == true ) {
@@ -58,7 +58,7 @@ function addBookToLibrary(newBook) {
 function displayBooks(libraryArray) {
 
     for (let i = 0; i < libraryArray.length; i++) {
-        let newCard = buildBookCard(libraryArray[i]["author"], libraryArray[i]["title"], libraryArray[i]["pages"], libraryArray[i]["status"]);
+        let newCard = buildBookCard(libraryArray[i]["author"], libraryArray[i]["title"], libraryArray[i]["pages"], libraryArray[i]["readStatus"]);
         main.appendChild(newCard);
     }
 
