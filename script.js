@@ -39,15 +39,15 @@ submitInformation.addEventListener("click", (e) => {
     
             displayBooks(submittedBook, myLibrary);
 
-            let readUnreadStatus = document.querySelectorAll(".read-unread");
-            readUnreadStatus.forEach( e => e.addEventListener("click", (e) => {
+            let removeBookButtons = document.querySelectorAll(".removeBookNow");
+            removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
                 if (e.target) {
                     console.log(e.target);
                 } 
             }));
 
-            let removeBookButtons = document.querySelectorAll(".removeBookNow");
-            removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
+            let readUnreadStatus = document.querySelectorAll(".read-unread");
+            readUnreadStatus.forEach( e => e.addEventListener("click", (e) => {
                 if (e.target) {
                     console.log(e.target);
                 } 
@@ -83,7 +83,7 @@ Book.prototype.buildBook = function() {
     let statusText = document.createElement("p");
     statusText.classList.add("cardText");
     // Then I can querySelect, change inner text to match the relevant thing. maybe
-    statusText.setAttribute("id","statusText");
+    statusText.classList.add("statusText");
     statusText.innerText = `Status: ${this.readStatus}`;
 
     let cardButtonBox = document.createElement("div");
