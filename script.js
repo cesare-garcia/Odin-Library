@@ -51,11 +51,21 @@ function Book(authorName, title, pages, readStatus) {
     this.readStatus = readStatus;
 }
 
+Book.prototype.changeStatus = function() {
+    if ( this.readStatus == "READ" ) {
+        this.readStatus = "UNREAD";
+    } else {
+        this.readStatus = "READ";
+    }
+};
+
 function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
 function displayBooks(libraryArray) {
+
+// find some way to prevent repeats
 
     for (let i = 0; i < libraryArray.length; i++) {
         let newCard = buildBookCard(libraryArray[i]["author"], libraryArray[i]["title"], libraryArray[i]["pages"], libraryArray[i]["readStatus"]);
