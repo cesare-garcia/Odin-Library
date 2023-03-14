@@ -107,8 +107,6 @@ Book.prototype.buildBook = function() {
     return bookCardDiv;
 };
 
-
-
 function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
