@@ -47,10 +47,10 @@ submitInformation.addEventListener("click", (e) => {
                     let bookShelf2 = document.querySelector(".bookShelf");
                     bookShelf2.removeChild(removedItem);
                     myLibrary.splice(cardIndex, 1);
-                    displayBooks(myLibrary);
-                    removeBookButtons = document.querySelectorAll(".removeBookNow");
-                    console.log(removeBookButtons);
-                    // figure out why calling display books under remove and read prevents me from engaging further with my buttons
+                    console.log(myLibrary);
+
+                    // final piece, figure out how to not break the library when removing a card leads to
+                    // disruptions in the data-indexes of cards.
 
                 } 
             }));
@@ -60,7 +60,6 @@ submitInformation.addEventListener("click", (e) => {
                 if (e.target) {
                     let cardIndex = e.target.getAttribute("data-index");
                     myLibrary[cardIndex].changeStatus();
-                    console.log(myLibrary[cardIndex]);
                     let status_p = document.querySelector(`p[data-index="${cardIndex}"]`);
                     status_p.innerText = `Status: ${myLibrary[cardIndex].readStatus}`;
                 } 
