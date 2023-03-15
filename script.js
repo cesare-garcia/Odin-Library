@@ -47,11 +47,18 @@ submitInformation.addEventListener("click", (e) => {
                     let bookShelf2 = document.querySelector(".bookShelf");
                     bookShelf2.removeChild(removedItem);
                     myLibrary.splice(cardIndex, 1);
-                    console.log(myLibrary);
 
-                    // final piece, figure out how to not break the library when removing a card leads to
-                    // disruptions in the data-indexes of cards.
-
+                    let remainingCards = document.querySelectorAll(".bookCard");
+                    let remainingStatus = document.querySelectorAll(".statusText");
+                    let remainingRemove = document.querySelectorAll("button.removeBookNow");
+                    let remainingRead = document.querySelectorAll("button.read-unread");
+                    for ( let i = 0; i < remainingCards.length; i++ ) {
+                        console.log(remainingCards[i]);
+                        remainingCards[i].setAttribute("data-index",`${i}`);
+                        remainingStatus[i].setAttribute("data-index",`${i}`);
+                        remainingRemove[i].setAttribute("data-index",`${i}`);
+                        remainingRead[i].setAttribute("data-index",`${i}`);
+                    }
                 } 
             }));
 
