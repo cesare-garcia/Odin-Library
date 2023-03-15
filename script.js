@@ -43,17 +43,26 @@ submitInformation.addEventListener("click", (e) => {
             removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
                 if (e.target) {
                     let cardIndex = e.target.getAttribute("data-index");
-                    let removedItem = document.querySelector(`div[data-index="${cardIndex}"`);
+                    let removedItem = document.querySelector(`div[data-index="${cardIndex}"]`);
                     let bookShelf2 = document.querySelector(".bookShelf");
                     bookShelf2.removeChild(removedItem);
                     myLibrary.splice(cardIndex, 1);
+                    displayBooks(myLibrary);
+                    removeBookButtons = document.querySelectorAll(".removeBookNow");
+                    console.log(removeBookButtons);
+                    // figure out why calling display books under remove and read prevents me from engaging further with my buttons
+
                 } 
             }));
 
             let readUnreadStatus = document.querySelectorAll(".read-unread");
             readUnreadStatus.forEach( e => e.addEventListener("click", (e) => {
                 if (e.target) {
-                    console.log(e.target);
+                    let cardIndex = e.target.getAttribute("data-index");
+                    myLibrary[cardIndex].changeStatus();
+                    console.log(myLibrary[cardIndex]);
+                    let status_p = document.querySelector(`p[data-index="${cardIndex}"]`);
+                    status_p.innerText = `Status: ${myLibrary[cardIndex].readStatus}`;
                 } 
             }));
         }  
@@ -87,8 +96,8 @@ Book.prototype.buildBook = function(arrayIndex) {
     `;
     let statusText = document.createElement("p");
     statusText.classList.add("cardText");
-    // Then I can querySelect, change inner text to match the relevant thing. maybe
     statusText.classList.add("statusText");
+    statusText.setAttribute("data-index",`${arrayIndex}`);
     statusText.innerText = `Status: ${this.readStatus}`;
 
     let cardButtonBox = document.createElement("div");
@@ -100,6 +109,7 @@ Book.prototype.buildBook = function(arrayIndex) {
     let readButton = document.createElement("button");
     readButton.innerText = "Read/Unread?";
     readButton.classList.add("read-unread");
+    readButton.setAttribute("data-index",`${arrayIndex}`);
 
     bookCardDiv.appendChild(cardText);
     bookCardDiv.appendChild(statusText);
