@@ -37,12 +37,15 @@ submitInformation.addEventListener("click", (e) => {
             overlayElement.removeAttribute("id");
             form.hidden = true;
     
-            displayBooks(submittedBook, myLibrary);
+            displayBooks(myLibrary);
 
             let removeBookButtons = document.querySelectorAll(".removeBookNow");
             removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
                 if (e.target) {
-                    console.log(e.target);
+                    let cardIndex = e.target.getAttribute("data-index");                    
+                    let removedItem = document.querySelector(`div[data-index="${cardIndex}"`);
+                    let bookShelf2 = document.querySelector(".bookShelf");
+                    bookShelf2.removeChild(removedItem);
                 } 
             }));
 
@@ -71,9 +74,10 @@ Book.prototype.changeStatus = function() {
     }
 };
 
-Book.prototype.buildBook = function() {
+Book.prototype.buildBook = function(arrayIndex) {
     let bookCardDiv = document.createElement("div");
     bookCardDiv.classList.add("bookCard");
+    bookCardDiv.setAttribute("data-index",`${arrayIndex}`);
     let cardText = document.createElement("p");
     cardText.classList.add("cardText");
     cardText.innerText = `Author: ${this.author}
@@ -91,6 +95,7 @@ Book.prototype.buildBook = function() {
     let removeButton = document.createElement("button");
     removeButton.innerText = "Remove";
     removeButton.classList.add("removeBookNow");
+    removeButton.setAttribute("data-index",`${arrayIndex}`);
     let readButton = document.createElement("button");
     readButton.innerText = "Read/Unread?";
     readButton.classList.add("read-unread");
@@ -108,7 +113,7 @@ function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
-function displayBooks(currentBook, libraryArray) {
+function displayBooks(libraryArray) {
 
     let bookShelfPresence = document.querySelector(".bookShelf");
     if ( bookShelfPresence == null ) {
@@ -117,7 +122,7 @@ function displayBooks(currentBook, libraryArray) {
         main.appendChild(bookShelf);
 
         for (let i = 0; i < libraryArray.length; i++) {
-            let newCard = myLibrary[i].buildBook();
+            let newCard = myLibrary[i].buildBook(i);
             bookShelf.appendChild(newCard);
         }
     } else {
@@ -127,7 +132,7 @@ function displayBooks(currentBook, libraryArray) {
         main.appendChild(bookShelf);
         
         for (let i = 0; i < libraryArray.length; i++) {
-            let newCard = myLibrary[i].buildBook();
+            let newCard = myLibrary[i].buildBook(i);
             bookShelf.appendChild(newCard);
         }
     }    
