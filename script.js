@@ -42,10 +42,11 @@ submitInformation.addEventListener("click", (e) => {
             let removeBookButtons = document.querySelectorAll(".removeBookNow");
             removeBookButtons.forEach( e => e.addEventListener("click", (e) => {
                 if (e.target) {
-                    let cardIndex = e.target.getAttribute("data-index");                    
+                    let cardIndex = e.target.getAttribute("data-index");
                     let removedItem = document.querySelector(`div[data-index="${cardIndex}"`);
                     let bookShelf2 = document.querySelector(".bookShelf");
                     bookShelf2.removeChild(removedItem);
+                    myLibrary.splice(cardIndex, 1);
                 } 
             }));
 
