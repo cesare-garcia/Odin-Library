@@ -25,7 +25,10 @@ submitInformation.addEventListener("click", (e) => {
     }
 
     if ( authorInput != "" && titleInput != "" && pagesInput != "" ) {
-        let submittedBook = new Book (authorInput, titleInput, pagesInput, statusInput);
+        // let submittedBook = new Book (authorInput, titleInput, pagesInput, statusInput);
+
+        let submittedBook = new LibraryBook(authorInput, titleInput, pagesInput, statusInput);
+
         let duplicateTest = myLibrary.some( (e) => e["author"] == submittedBook["author"] && e["title"] == submittedBook["title"] );
 
         if ( duplicateTest == true ) {
@@ -75,56 +78,110 @@ submitInformation.addEventListener("click", (e) => {
     }
 });
 
-function Book(authorName, title, pages, readStatus) {
-    this.author = authorName;
-    this.title = title;
-    this.pages = pages;
-    this.readStatus = readStatus;
+// refactoring to use a class
+
+class LibraryBook {
+    constructor(authorName, title, pages, readStatus) {
+        this.name = authorName;
+        this.title = title;
+        this.pages = pages;
+        this.readStatus = readStatus;
+    }
+
+    buildBook(arrayIndex) {
+        let bookCardDiv = document.createElement("div");
+        bookCardDiv.classList.add("bookCard");
+        bookCardDiv.setAttribute("data-index",`${arrayIndex}`);
+        let cardText = document.createElement("p");
+        cardText.classList.add("cardText");
+        cardText.innerText = `Author: ${this.author}
+            Title: ${this.title}
+            Pages: ${this.pages}
+        `;
+        let statusText = document.createElement("p");
+        statusText.classList.add("cardText");
+        statusText.classList.add("statusText");
+        statusText.setAttribute("data-index",`${arrayIndex}`);
+        statusText.innerText = `Status: ${this.readStatus}`;
+    
+        let cardButtonBox = document.createElement("div");
+        cardButtonBox.classList.add("cardButtonBox");
+        let removeButton = document.createElement("button");
+        removeButton.innerText = "Remove";
+        removeButton.classList.add("removeBookNow");
+        removeButton.setAttribute("data-index",`${arrayIndex}`);
+        let readButton = document.createElement("button");
+        readButton.innerText = "Read/Unread?";
+        readButton.classList.add("read-unread");
+        readButton.setAttribute("data-index",`${arrayIndex}`);
+    
+        bookCardDiv.appendChild(cardText);
+        bookCardDiv.appendChild(statusText);
+        bookCardDiv.appendChild(cardButtonBox);
+        cardButtonBox.appendChild(removeButton);
+        cardButtonBox.appendChild(readButton);
+    
+        return bookCardDiv;    
+    }
+    changeStatus() {
+        if ( this.readStatus == "READ" ) {
+            this.readStatus = "UNREAD";
+        } else {
+            this.readStatus = "READ";
+        }
+    }
 }
 
-Book.prototype.changeStatus = function() {
-    if ( this.readStatus == "READ" ) {
-        this.readStatus = "UNREAD";
-    } else {
-        this.readStatus = "READ";
-    }
-};
+// function Book(authorName, title, pages, readStatus) {
+//     this.author = authorName;
+//     this.title = title;
+//     this.pages = pages;
+//     this.readStatus = readStatus;
+// }
 
-Book.prototype.buildBook = function(arrayIndex) {
-    let bookCardDiv = document.createElement("div");
-    bookCardDiv.classList.add("bookCard");
-    bookCardDiv.setAttribute("data-index",`${arrayIndex}`);
-    let cardText = document.createElement("p");
-    cardText.classList.add("cardText");
-    cardText.innerText = `Author: ${this.author}
-        Title: ${this.title}
-        Pages: ${this.pages}
-    `;
-    let statusText = document.createElement("p");
-    statusText.classList.add("cardText");
-    statusText.classList.add("statusText");
-    statusText.setAttribute("data-index",`${arrayIndex}`);
-    statusText.innerText = `Status: ${this.readStatus}`;
+// Book.prototype.changeStatus = function() {
+//     if ( this.readStatus == "READ" ) {
+//         this.readStatus = "UNREAD";
+//     } else {
+//         this.readStatus = "READ";
+//     }
+// };
 
-    let cardButtonBox = document.createElement("div");
-    cardButtonBox.classList.add("cardButtonBox");
-    let removeButton = document.createElement("button");
-    removeButton.innerText = "Remove";
-    removeButton.classList.add("removeBookNow");
-    removeButton.setAttribute("data-index",`${arrayIndex}`);
-    let readButton = document.createElement("button");
-    readButton.innerText = "Read/Unread?";
-    readButton.classList.add("read-unread");
-    readButton.setAttribute("data-index",`${arrayIndex}`);
+// Book.prototype.buildBook = function(arrayIndex) {
+//     let bookCardDiv = document.createElement("div");
+//     bookCardDiv.classList.add("bookCard");
+//     bookCardDiv.setAttribute("data-index",`${arrayIndex}`);
+//     let cardText = document.createElement("p");
+//     cardText.classList.add("cardText");
+//     cardText.innerText = `Author: ${this.author}
+//         Title: ${this.title}
+//         Pages: ${this.pages}
+//     `;
+//     let statusText = document.createElement("p");
+//     statusText.classList.add("cardText");
+//     statusText.classList.add("statusText");
+//     statusText.setAttribute("data-index",`${arrayIndex}`);
+//     statusText.innerText = `Status: ${this.readStatus}`;
 
-    bookCardDiv.appendChild(cardText);
-    bookCardDiv.appendChild(statusText);
-    bookCardDiv.appendChild(cardButtonBox);
-    cardButtonBox.appendChild(removeButton);
-    cardButtonBox.appendChild(readButton);
+//     let cardButtonBox = document.createElement("div");
+//     cardButtonBox.classList.add("cardButtonBox");
+//     let removeButton = document.createElement("button");
+//     removeButton.innerText = "Remove";
+//     removeButton.classList.add("removeBookNow");
+//     removeButton.setAttribute("data-index",`${arrayIndex}`);
+//     let readButton = document.createElement("button");
+//     readButton.innerText = "Read/Unread?";
+//     readButton.classList.add("read-unread");
+//     readButton.setAttribute("data-index",`${arrayIndex}`);
 
-    return bookCardDiv;
-};
+//     bookCardDiv.appendChild(cardText);
+//     bookCardDiv.appendChild(statusText);
+//     bookCardDiv.appendChild(cardButtonBox);
+//     cardButtonBox.appendChild(removeButton);
+//     cardButtonBox.appendChild(readButton);
+
+//     return bookCardDiv;
+// };
 
 function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
