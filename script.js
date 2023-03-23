@@ -10,6 +10,7 @@ addNewBook.addEventListener("click", (e) => {
     overlayElement.setAttribute("id","overlay");
     form.hidden = false;
 });
+// 
 
 submitInformation.addEventListener("click", (e) => {
     e.preventDefault();
