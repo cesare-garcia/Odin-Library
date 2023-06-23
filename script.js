@@ -29,6 +29,7 @@ submitInformation.addEventListener("click", (e) => {
         // let submittedBook = new Book (authorInput, titleInput, pagesInput, statusInput);
 
         let submittedBook = new LibraryBook(authorInput, titleInput, pagesInput, statusInput);
+        console.log(submittedBook);
 
         let duplicateTest = myLibrary.some( (e) => e["author"] == submittedBook["author"] && e["title"] == submittedBook["title"] );
 
@@ -95,7 +96,7 @@ class LibraryBook {
         bookCardDiv.setAttribute("data-index",`${arrayIndex}`);
         let cardText = document.createElement("p");
         cardText.classList.add("cardText");
-        cardText.innerText = `Author: ${this.author}
+        cardText.innerText = `Author: ${this.name}
             Title: ${this.title}
             Pages: ${this.pages}
         `;
